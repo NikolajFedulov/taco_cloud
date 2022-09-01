@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Controller
 @RequestMapping("/design")
-@SessionAttributes("tacoOder")
+@SessionAttributes("tacoOrder")
 public class DesignTacoController {
 
     @ModelAttribute
@@ -52,6 +52,13 @@ public class DesignTacoController {
     @GetMapping
     public String showDesignForm() {
         return "design";
+    }
+
+    @PostMapping
+    public String processTaco (Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+        return "redirect:/orders/current";
     }
 
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
