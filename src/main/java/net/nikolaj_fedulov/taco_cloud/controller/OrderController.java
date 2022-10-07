@@ -3,8 +3,11 @@ package net.nikolaj_fedulov.taco_cloud.controller;
 import lombok.extern.slf4j.Slf4j;
 import net.nikolaj_fedulov.taco_cloud.model.TacoOrder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -18,7 +21,10 @@ public class OrderController {
     }
 
     @PostMapping
-    public String processOder(TacoOrder tacoOrder, SessionStatus sessionStatus) {
+    public String processOder(@Valid TacoOrder tacoOrder, Errors errors, SessionStatus sessionStatus) {
+        if (errors.hasErrors()) {
+            return "orderForm";
+        }
         log.info("Oder submitted: {}", tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
