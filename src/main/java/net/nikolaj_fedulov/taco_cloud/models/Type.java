@@ -1,4 +1,4 @@
-package net.nikolaj_fedulov.taco_cloud.model;
+package net.nikolaj_fedulov.taco_cloud.models;
 
 public enum Type {
     WRAP,
