@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Slf4j
 @Controller
@@ -35,6 +36,7 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Oder submitted: {}", tacoOrder);
+        tacoOrder.setPlacedAt(new Date());
         orderRepository.save(tacoOrder);
         sessionStatus.setComplete();
         return "redirect:/";
