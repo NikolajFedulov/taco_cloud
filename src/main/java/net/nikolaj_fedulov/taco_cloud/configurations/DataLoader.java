@@ -34,8 +34,6 @@ public class DataLoader implements CommandLineRunner{
                 new Ingredient("SLSA", "Salsa", Type.SAUCE),
                 new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
-        for (Ingredient ingredients: ingredientList) {
-            ingredientRepository.insertIngredient(ingredients.getId(), ingredients.getName(), ingredients.getType().toString());
-        }
+        ingredientRepository.saveAll(ingredientList);
     }
 }
